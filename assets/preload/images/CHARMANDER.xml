@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="red.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="charizard menu instancia 10000" x="0" y="0" width="372" height="414" pivotX="5.1" pivotY="5.15" frameX="-6" frameY="-6" frameWidth="383" frameHeight="421"/>
+	<SubTexture name="charizard menu instancia 10001" x="0" y="0" width="372" height="414" frameX="-6" frameY="-6" frameWidth="383" frameHeight="421"/>
+	<SubTexture name="charizard menu instancia 10002" x="372" y="0" width="379" height="408" frameX="-2" frameY="-12" frameWidth="383" frameHeight="421"/>
+	<SubTexture name="charizard menu instancia 10003" x="372" y="0" width="379" height="408" frameX="-2" frameY="-12" frameWidth="383" frameHeight="421"/>
+	<SubTexture name="charizard menu instancia 10004" x="0" y="414" width="383" height="395" frameX="0" frameY="-26" frameWidth="383" frameHeight="421"/>
+	<SubTexture name="charizard menu instancia 10005" x="0" y="414" width="383" height="395" frameX="0" frameY="-26" frameWidth="383" frameHeight="421"/>
+	<SubTexture name="charizard menu instancia 10006" x="383" y="414" width="362" height="420" frameX="-11" frameY="0" frameWidth="383" frameHeight="421"/>
+	<SubTexture name="charizard menu instancia 10007" x="383" y="414" width="362" height="420" frameX="-11" frameY="0" frameWidth="383" frameHeight="421"/>
+	<SubTexture name="charizard menu instancia 10008" x="0" y="0" width="372" height="414" frameX="-6" frameY="-6" frameWidth="383" frameHeight="421"/>
+	<SubTexture name="charizard menu instancia 10009" x="0" y="0" width="372" height="414" frameX="-6" frameY="-6" frameWidth="383" frameHeight="421"/>
+	<SubTexture name="charizard menu instancia 10010" x="0" y="0" width="372" height="414" frameX="-6" frameY="-6" frameWidth="383" frameHeight="421"/>
+	<SubTexture name="charizard menu instancia 10011" x="0" y="0" width="372" height="414" frameX="-6" frameY="-6" frameWidth="383" frameHeight="421"/>
+	<SubTexture name="charizard menu instancia 10012" x="0" y="0" width="372" height="414" frameX="-6" frameY="-6" frameWidth="383" frameHeight="421"/>
+	<SubTexture name="charizard menu instancia 10013" x="0" y="0" width="372" height="414" frameX="-6" frameY="-6" frameWidth="383" frameHeight="421"/>
+</TextureAtlas>
