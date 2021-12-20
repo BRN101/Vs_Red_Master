@@ -401,20 +401,19 @@ class Character extends FlxSprite
 
 				antialiasing = false;
 			case 'bf-pixel-dead':
-				frames = Paths.getSparrowAtlas('characters/bfPixelsDEAD');
-				animation.addByPrefix('singUP', "BF Dies pixel", 24, false);
-				animation.addByPrefix('firstDeath', "BF Dies pixel", 24, false);
-				animation.addByPrefix('deathLoop', "Retry Loop", 24, true);
-				animation.addByPrefix('deathConfirm', "RETRY CONFIRM", 24, false);
+				frames = Paths.getSparrowAtlas('characters/pixelbf');
+				animation.addByPrefix('firstDeath', "BF DIES", 24, false);
+				animation.addByPrefix('deathLoop', "bf dies loop", 24, true);
+				animation.addByPrefix('deathConfirm', "bf confirms0", 24, false);
 				animation.play('firstDeath');
 
-				addOffset('firstDeath');
-				addOffset('deathLoop', -37);
-				addOffset('deathConfirm', -37);
+				addOffset('firstDeath', 0, 0);
+				addOffset('deathLoop', -50, -13);
+				addOffset('deathConfirm', -17, 0);
 				playAnim('firstDeath');
 				// pixel bullshit
-				setGraphicSize(Std.int(width * 6));
-				updateHitbox();
+				//setGraphicSize(Std.int(width * 6));
+				//updateHitbox();
 				antialiasing = false;
 				flipX = true;
 

@@ -440,7 +440,7 @@ class TitleState extends MusicBeatState
 				createCoolText(['valengarfy', 'brn', 'kimakurus', 'benjiworld']);
 			// credTextShit.visible = true;
 			case 3:
-				addMoreText('ina nother funny mod');
+				addMoreText('in another funny mod');
 			// credTextShit.text += '\npresent...';
 			// credTextShit.addText();
 			case 4:

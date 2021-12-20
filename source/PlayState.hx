@@ -1137,7 +1137,7 @@ class PlayState extends MusicBeatState
 
 		scoreTxt.scrollFactor.set();
 		
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		scoreTxt.setFormat(Paths.font("Pokemon_GB.ttf"), 16, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 
 		add(scoreTxt);
 
@@ -1779,10 +1779,10 @@ class PlayState extends MusicBeatState
 			{
 				case 'pixel':
 					babyArrow.frames = Paths.getSparrowAtlas('notes/NOTE_assets');
-						babyArrow.animation.addByPrefix('green', 'up press0000');
-						babyArrow.animation.addByPrefix('blue', 'down press0000');
-						babyArrow.animation.addByPrefix('purple', 'left press0000');
-						babyArrow.animation.addByPrefix('red', 'right press0000');
+						babyArrow.animation.addByPrefix('green', 'arrow static up');
+						babyArrow.animation.addByPrefix('blue', 'arrow static down');
+						babyArrow.animation.addByPrefix('purple', 'arrow static left');
+						babyArrow.animation.addByPrefix('red', 'arrow static right');
 	
 						babyArrow.antialiasing = false;
 						babyArrow.setGraphicSize(Std.int(babyArrow.width * 0.7));
@@ -1791,22 +1791,22 @@ class PlayState extends MusicBeatState
 						{
 							case 0:
 								babyArrow.x += Note.swagWidth * 0;
-								babyArrow.animation.addByPrefix('static', 'left press0000');
+								babyArrow.animation.addByPrefix('static', 'arrow static left');
 								babyArrow.animation.addByPrefix('pressed', 'left press', 24, false);
 								babyArrow.animation.addByPrefix('confirm', 'left confirm', 24, false);
 							case 1:
 								babyArrow.x += Note.swagWidth * 1;
-								babyArrow.animation.addByPrefix('static', 'down press0000');
+								babyArrow.animation.addByPrefix('static', 'arrow static down');
 								babyArrow.animation.addByPrefix('pressed', 'down press', 24, false);
 								babyArrow.animation.addByPrefix('confirm', 'down confirm', 24, false);
 							case 2:
 								babyArrow.x += Note.swagWidth * 2;
-								babyArrow.animation.addByPrefix('static', 'up press0000');
+								babyArrow.animation.addByPrefix('static', 'arrow static up');
 								babyArrow.animation.addByPrefix('pressed', 'up press', 24, false);
 								babyArrow.animation.addByPrefix('confirm', 'up confirm', 24, false);
 							case 3:
 								babyArrow.x += Note.swagWidth * 3;
-								babyArrow.animation.addByPrefix('static', 'right press0000');
+								babyArrow.animation.addByPrefix('static', 'arrow static right');
 								babyArrow.animation.addByPrefix('pressed', 'right press', 24, false);
 								babyArrow.animation.addByPrefix('confirm', 'right confirm', 24, false);
 						}
@@ -2127,7 +2127,7 @@ class PlayState extends MusicBeatState
 
 		var lengthInPx = scoreTxt.textField.length * scoreTxt.frameHeight; // bad way but does more or less a better job
 
-		scoreTxt.x = (originalX - (lengthInPx / 2)) + 335;
+		scoreTxt.x = (originalX - (lengthInPx / 2)) + 200;
 
 		if (controls.PAUSE && startedCountdown && canPause)
 		{

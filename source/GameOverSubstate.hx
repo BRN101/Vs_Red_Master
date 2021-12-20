@@ -22,9 +22,9 @@ class GameOverSubstate extends MusicBeatSubstate
 		switch (PlayState.SONG.player1)
 		{
 			case 'bf-pixel':
-				daBf = 'bf-pixel';
+				daBf = 'bf-pixel-dead';
 			default:
-				daBf = 'bf-pixel';
+				daBf = 'bf-pixel-dead';
 		}
 
 		super();
