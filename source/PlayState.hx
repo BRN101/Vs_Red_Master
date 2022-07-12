@@ -70,7 +70,12 @@ import sys.FileSystem;
 #end
 
 using StringTools;
-
+#if android
+	        addAndroidControls();
+	#end
+#if android
+	        androidc.visible = true;
+	        #end
 class PlayState extends MusicBeatState
 {
 	public static var instance:PlayState = null;
