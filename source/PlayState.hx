@@ -7,9 +7,6 @@ import openfl.ui.Keyboard;
 import openfl.events.KeyboardEvent;
 import Replay.Ana;
 import Replay.Analysis;
-#if cpp
-import webm.WebmPlayer;
-#end
 import flixel.input.keyboard.FlxKey;
 import haxe.Exception;
 import openfl.geom.Matrix;
@@ -4043,7 +4040,7 @@ class PlayState extends MusicBeatState
 
 				var noteDiff:Float = -(note.strumTime - Conductor.songPosition);
 
-				if(loadRep)
+				//if(loadRep)
 				{
 					noteDiff = findByTime(note.strumTime)[3];
 					note.rating = rep.replay.songJudgements[findByTimeIndex(note.strumTime)];
@@ -4094,7 +4091,7 @@ class PlayState extends MusicBeatState
 					#end
 
 
-					if(!loadRep && note.mustPress)
+					//if(!loadRep && note.mustPress)
 					{
 						var array = [note.strumTime,note.sustainLength,note.noteData,noteDiff];
 						if (note.isSustainNote)
