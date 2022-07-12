@@ -3627,7 +3627,7 @@ androidc.visible = true;
 					});
 				}
 		 
-				if (KeyBinds.gamepad && !FlxG.keys.justPressed.ANY)
+				//if (KeyBinds.gamepad && !FlxG.keys.justPressed.ANY)
 				{
 					// PRESSES, check for note hits
 					if (pressArray.contains(true) && generatedMusic)
