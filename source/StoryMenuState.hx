@@ -1,4 +1,4 @@
-package;
+,package;
 
 import flixel.input.gamepad.FlxGamepad;
 import flixel.FlxG;
@@ -18,6 +18,9 @@ import lime.net.curl.CURLCode;
 import Discord.DiscordClient;
 #end
 
+#if android
+addVirtualPad(FULL, A_B);
+#end
 using StringTools;
 
 class StoryMenuState extends MusicBeatState
@@ -237,12 +240,12 @@ class StoryMenuState extends MusicBeatState
 					}
 				}
 
-				if (FlxG.keys.justPressed.UP)
+				if (controls.UP_P)
 				{
 					changeWeek(-1);
 				}
 
-				if (FlxG.keys.justPressed.DOWN)
+				if (controls.DOWN_P)
 				{
 					changeWeek(1);
 				}

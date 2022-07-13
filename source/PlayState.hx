@@ -7,9 +7,6 @@ import openfl.ui.Keyboard;
 import openfl.events.KeyboardEvent;
 import Replay.Ana;
 import Replay.Analysis;
-#if cpp
-import webm.WebmPlayer;
-#end
 import flixel.input.keyboard.FlxKey;
 import haxe.Exception;
 import openfl.geom.Matrix;
@@ -1184,7 +1181,9 @@ class PlayState extends MusicBeatState
 		kadeEngineWatermark.cameras = [camHUD];
 		if (loadRep)
 			replayTxt.cameras = [camHUD];
-
+         #if android
+addAndroidControls ();
+#end
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -1349,6 +1348,9 @@ class PlayState extends MusicBeatState
 
 	function startCountdown():Void
 	{
+	#if android
+androidc.visible = true;
+#end
 		inCutscene = false;
 
 		/*generateStaticArrows(0);
@@ -2892,8 +2894,9 @@ class PlayState extends MusicBeatState
 					StoryMenuState.weekUnlocked[Std.int(Math.min(storyWeek + 1, StoryMenuState.weekUnlocked.length - 1))] = true;
 
 					if (SONG.validScore)
-					{
+					{ #if ng
 						NGio.unlockMedal(60961);
+						#end
 						Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
 					}
 
@@ -3609,12 +3612,6 @@ class PlayState extends MusicBeatState
 					releaseArray = [false, false, false, false];
 				} 
 
-				var anas:Array<Ana> = [null,null,null,null];
-
-				for (i in 0...pressArray.length)
-					if (pressArray[i])
-						anas[i] = new Ana(Conductor.songPosition, null, false, "miss", i);
-
 				// HOLDS, check for sustain notes
 				if (holdArray.contains(true) && /*!boyfriend.stunned && */ generatedMusic)
 				{
@@ -3625,8 +3622,6 @@ class PlayState extends MusicBeatState
 					});
 				}
 		 
-				if (KeyBinds.gamepad && !FlxG.keys.justPressed.ANY)
-				{
 					// PRESSES, check for note hits
 					if (pressArray.contains(true) && generatedMusic)
 					{
@@ -3697,9 +3692,6 @@ class PlayState extends MusicBeatState
 										mashViolations--;
 									scoreTxt.color = FlxColor.WHITE;
 									var noteDiff:Float = -(coolNote.strumTime - Conductor.songPosition);
-									anas[coolNote.noteData].hit = true;
-									anas[coolNote.noteData].hitJudge = Ratings.CalculateRating(noteDiff, Math.floor((PlayStateChangeables.safeFrames / 60) * 1000));
-									anas[coolNote.noteData].nearestNote = [coolNote.strumTime,coolNote.noteData,coolNote.sustainLength];
 									goodNoteHit(coolNote);
 								}
 							}
@@ -3712,11 +3704,7 @@ class PlayState extends MusicBeatState
 							}
 					}
 
-					if (!loadRep)
-						for (i in anas)
-							if (i != null)
-								replayAna.anaArray.push(i); // put em all there
-				}
+
 				notes.forEachAlive(function(daNote:Note)
 				{
 					if(PlayStateChangeables.useDownscroll && daNote.y > strumLine.y ||
@@ -3823,115 +3811,6 @@ class PlayState extends MusicBeatState
 
 			public function backgroundVideo(source:String) // for background videos
 				{
-					#if cpp
-					useVideo = true;
-			
-					FlxG.stage.window.onFocusOut.add(focusOut);
-					FlxG.stage.window.onFocusIn.add(focusIn);
-
-					var ourSource:String = "assets/videos/daWeirdVid/dontDelete.webm";
-					WebmPlayer.SKIP_STEP_LIMIT = 90;
-					var str1:String = "WEBM SHIT"; 
-					webmHandler = new WebmHandler();
-					webmHandler.source(ourSource);
-					webmHandler.makePlayer();
-					webmHandler.webm.name = str1;
-			
-					GlobalVideo.setWebm(webmHandler);
-
-					GlobalVideo.get().source(source);
-					GlobalVideo.get().clearPause();
-					if (GlobalVideo.isWebm)
-					{
-						GlobalVideo.get().updatePlayer();
-					}
-					GlobalVideo.get().show();
-			
-					if (GlobalVideo.isWebm)
-					{
-						GlobalVideo.get().restart();
-					} else {
-						GlobalVideo.get().play();
-					}
-					
-					var data = webmHandler.webm.bitmapData;
-			
-					videoSprite = new FlxSprite(-470,-30).loadGraphic(data);
-			
-					videoSprite.setGraphicSize(Std.int(videoSprite.width * 1.2));
-			
-					remove(gf);
-					remove(boyfriend);
-					remove(dad);
-					add(videoSprite);
-					add(gf);
-					add(boyfriend);
-					add(dad);
-			
-					trace('poggers');
-			
-					if (!songStarted)
-						webmHandler.pause();
-					else
-						webmHandler.resume();
-					#end
-				}
-
-	function noteMiss(direction:Int = 1, daNote:Note):Void
-	{
-		if (!boyfriend.stunned)
-		{
-			health -= 0.04;
-			if (combo > 5 && gf.animOffsets.exists('sad'))
-			{
-				gf.playAnim('sad');
-			}
-			combo = 0;
-			misses++;
-
-			if (daNote != null)
-			{
-				if (!loadRep)
-				{
-					saveNotes.push([daNote.strumTime,0,direction,166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166]);
-					saveJudge.push("miss");
-				}
-			}
-			else
-				if (!loadRep)
-				{
-					saveNotes.push([Conductor.songPosition,0,direction,166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166]);
-					saveJudge.push("miss");
-				}
-
-			//var noteDiff:Float = Math.abs(daNote.strumTime - Conductor.songPosition);
-			//var wife:Float = EtternaFunctions.wife3(noteDiff, FlxG.save.data.etternaMode ? 1 : 1.7);
-
-			if (FlxG.save.data.accuracyMod == 1)
-				totalNotesHit -= 1;
-
-			songScore -= 10;
-
-			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
-			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
-			// FlxG.log.add('played imss note');
-
-			switch (direction)
-			{
-				case 0:
-					boyfriend.playAnim('singLEFTmiss', true);
-				case 1:
-					boyfriend.playAnim('singDOWNmiss', true);
-				case 2:
-					boyfriend.playAnim('singUPmiss', true);
-				case 3:
-					boyfriend.playAnim('singRIGHTmiss', true);
-			}
-
-			#if windows
-			if (luaModchart != null)
-				luaModchart.executeState('playerOneMiss', [direction, Conductor.songPosition]);
-			#end
 
 
 			updateAccuracy();
@@ -4043,7 +3922,7 @@ class PlayState extends MusicBeatState
 
 				var noteDiff:Float = -(note.strumTime - Conductor.songPosition);
 
-				if(loadRep)
+				//if(loadRep)
 				{
 					noteDiff = findByTime(note.strumTime)[3];
 					note.rating = rep.replay.songJudgements[findByTimeIndex(note.strumTime)];
@@ -4094,7 +3973,7 @@ class PlayState extends MusicBeatState
 					#end
 
 
-					if(!loadRep && note.mustPress)
+					//if(!loadRep && note.mustPress)
 					{
 						var array = [note.strumTime,note.sustainLength,note.noteData,noteDiff];
 						if (note.isSustainNote)
