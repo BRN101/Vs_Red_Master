@@ -95,7 +95,26 @@ class DFJKOption extends Option
 		return "Key Bindings";
 	}
 }
+class AndroidControls extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+	}
 
+	public override function press():Bool
+	{
+		trace("switch");
+		FlxG.switchState(new android
+      .AndroidControlsMenu());
+		return false;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Android Controls"
+	}
+}
 class CpuStrums extends Option
 {
 	public function new(desc:String)
@@ -103,8 +122,8 @@ class CpuStrums extends Option
 		super();
 		description = desc;
 	}
-
-	public override function press():Bool
+	
+public override function press():Bool
 	{
 		FlxG.save.data.cpuStrums = !FlxG.save.data.cpuStrums;
 		
@@ -112,11 +131,11 @@ class CpuStrums extends Option
 		return true;
 	}
 
-	private override function updateDisplay():String
+private override function updateDisplay():String
 	{
 		return  FlxG.save.data.cpuStrums ? "Light CPU Strums" : "CPU Strums stay static";
 	}
-
+	
 }
 
 class DownscrollOption extends Option
